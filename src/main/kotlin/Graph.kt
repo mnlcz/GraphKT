@@ -1,10 +1,10 @@
 import java.util.*
 
-class Graph<T_NODO : Comparable<T_NODO>> constructor(private val content: Map<T_NODO, List<T_NODO>>)
+class Graph<T_NODE : Comparable<T_NODE>> constructor(private val content: Map<T_NODE, List<T_NODE>>)
 {
-    fun dfs(firstElement: T_NODO, operation: (T_NODO) -> Unit)
+    fun dfs(firstElement: T_NODE, operation: (T_NODE) -> Unit)
     {
-        val stack: Stack<T_NODO> = Stack()
+        val stack: Stack<T_NODE> = Stack()
         stack.push(firstElement)
         while(stack.isNotEmpty())
         {
@@ -14,9 +14,9 @@ class Graph<T_NODO : Comparable<T_NODO>> constructor(private val content: Map<T_
         }
     }
 
-    fun bfs(firstElement: T_NODO, operation: (T_NODO) -> Unit)
+    fun bfs(firstElement: T_NODE, operation: (T_NODE) -> Unit)
     {
-        val queue: Queue<T_NODO> = LinkedList()
+        val queue: Queue<T_NODE> = LinkedList()
         queue.add(firstElement)
         while(queue.isNotEmpty())
         {
@@ -24,6 +24,21 @@ class Graph<T_NODO : Comparable<T_NODO>> constructor(private val content: Map<T_
             operation(current)
             content[current]?.forEach { queue.add(it) }
         }
+    }
+
+    // Using DFS algo
+    fun hasPath(origin: T_NODE, destination: T_NODE): Boolean
+    {
+        val stack = Stack<T_NODE>()
+        stack.push(origin)
+        while(stack.isNotEmpty())
+        {
+            val current = stack.pop()
+            if(current == destination) return true
+
+            content[current]?.forEach { stack.push(it) }
+        }
+        return false
     }
 
     override fun toString(): String

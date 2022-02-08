@@ -1,16 +1,18 @@
 fun main()
 {
-    val contenido = contenidoPrueba()
-    val grafo = Grafo(contenido)
-    println(grafo.toString())
+    val content = test()
+    val graph = Graph(content)
+    println(graph.toString())
     print("DFS: ")
-    grafo.dfs('a') { nodo -> print("$nodo ") }
+    graph.dfs('a') { node -> print("$node ") }
     print("\nBFS: ")
-    grafo.bfs('a') { nodo -> print("$nodo ") }
+    graph.bfs('a') { nodo -> print("$nodo ") }
 
 }
 
-fun contenidoPrueba(): Map<Char, List<Char>> {
+
+fun test(): Map<Char, List<Char>>
+{
     return mapOf(
         'a' to listOf('c', 'b'),
         'b' to listOf('d'),
